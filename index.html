@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACE Barber Shop Barbier — Gatineau (Aylmer)</title>
+<meta name="description" content="ACE Barber Shop Barbier — barbershop père-fils à Aylmer, Gatineau. Coupes, barbe, rasage à l'ancienne. Réservez en ligne ou passez sans rendez-vous.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,600&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15120f;
+  --ink-soft:#221c17;
+  --card:#1e1813;
+  --cream:#f4ecda;
+  --cream-dim:#e7dcc3;
+  --gold:#c19a58;
+  --gold-soft:#e0c48b;
+  --oxblood:#7c2b32;
+  --oxblood-soft:#a33b45;
+  --pole-navy:#233a4d;
+  --line:rgba(244,236,218,0.14);
+  --line-strong:rgba(244,236,218,0.28);
+  --shadow:0 24px 60px -30px rgba(0,0,0,0.6);
+  --radius:2px;
+  --maxw:1160px;
+  --ff-display:'Fraunces', serif;
+  --ff-body:'Manrope', sans-serif;
+  --ff-mono:'Space Mono', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+}
+body{
+  font-family:var(--ff-body);
+  background:var(--ink);
+  color:var(--cream);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+h1,h2,h3{font-family:var(--ff-display);font-weight:700;line-height:1.05;letter-spacing:-0.01em;}
+.eyebrow{
+  font-family:var(--ff-mono);
+  font-size:12px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--gold-soft);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--gold);display:inline-block;}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--ff-mono);
+  font-size:13px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:15px 28px;
+  border:1px solid var(--gold);
+  color:var(--cream);
+  background:transparent;
+  cursor:pointer;
+  transition:background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+.btn:hover{background:var(--gold);color:var(--ink);transform:translateY(-1px);}
+.btn.solid{background:var(--gold);color:var(--ink);}
+.btn.solid:hover{background:var(--gold-soft);}
+.btn.small{padding:11px 20px;font-size:12px;}
+
+/* barber pole signature stripe */
+.pole-stripe{
+  background:repeating-linear-gradient(
+    45deg,
+    var(--oxblood) 0px, var(--oxblood) 14px,
+    var(--cream) 14px, var(--cream) 28px,
+    var(--pole-navy) 28px, var(--pole-navy) 42px,
+    var(--cream) 42px, var(--cream) 56px
+  );
+  background-size:79px 79px;
+  animation:polescroll 4.5s linear infinite;
+}
+@keyframes polescroll{
+  0%{background-position:0 0;}
+  100%{background-position:0 158px;}
+}
+
+/* ===== HEADER ===== */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(21,18,15,0.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-row{
+  display:flex;align-items:center;justify-content:space-between;
+  height:84px;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-mark{width:8px;height:34px;flex:none;}
+.brand-text{font-family:var(--ff-display);font-size:20px;font-weight:700;letter-spacing:0.01em;}
+.brand-text span{display:block;font-family:var(--ff-mono);font-size:10px;letter-spacing:0.2em;color:var(--gold-soft);font-weight:400;text-transform:uppercase;margin-top:2px;}
+nav.links{display:flex;gap:34px;align-items:center;}
+nav.links a{
+  font-family:var(--ff-mono);
+  font-size:12.5px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--cream-dim);
+  position:relative;
+  padding-bottom:4px;
+  transition:color 0.2s ease;
+}
+nav.links a::after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);
+  transition:width 0.25s ease;
+}
+nav.links a:hover{color:var(--cream);}
+nav.links a:hover::after{width:100%;}
+.nav-cta{display:flex;align-items:center;gap:18px;}
+.nav-phone{font-family:var(--ff-mono);font-size:13px;color:var(--gold-soft);letter-spacing:0.02em;}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px;}
+.burger span{width:22px;height:1.5px;background:var(--cream);display:block;}
+.mobile-panel{display:none;flex-direction:column;padding:16px 32px 28px;border-top:1px solid var(--line);}
+.mobile-panel a{
+  font-family:var(--ff-mono);font-size:14px;text-transform:uppercase;letter-spacing:0.06em;
+  padding:12px 0;border-bottom:1px solid var(--line);color:var(--cream-dim);
+}
+.mobile-panel.open{display:flex;}
+
+@media (max-width:880px){
+  nav.links, .nav-cta .btn{display:none;}
+  .burger{display:flex;}
+}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;
+  min-height:88vh;
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+  border-bottom:6px solid var(--gold);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:linear-gradient(180deg, rgba(21,18,15,0.35) 0%, rgba(21,18,15,0.55) 45%, rgba(21,18,15,0.96) 100%), url('coupe.jpg');
+  background-size:cover;
+  background-position:center 20%;
+  filter:saturate(0.85);
+}
+.hero-inner{position:relative;z-index:2;width:100%;padding-bottom:80px;}
+.hero .eyebrow{margin-bottom:26px;}
+.hero h1{
+  font-size:clamp(48px, 8vw, 96px);
+  color:var(--cream);
+  max-width:820px;
+}
+.hero h1 em{font-style:italic;color:var(--gold-soft);font-weight:600;}
+.hero-sub{
+  margin-top:22px;max-width:520px;font-size:17px;color:var(--cream-dim);
+}
+.hero-cta{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;}
+.hero-facts{
+  display:flex;gap:40px;margin-top:64px;flex-wrap:wrap;
+  border-top:1px solid var(--line-strong);padding-top:24px;
+}
+.hero-fact-label{font-family:var(--ff-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-soft);}
+.hero-fact-value{font-family:var(--ff-display);font-size:18px;margin-top:6px;}
+.pole-edge{position:absolute;left:0;top:0;bottom:0;width:8px;z-index:3;}
+
+/* ===== SECTION generic ===== */
+section{padding:120px 0;}
+.section-head{max-width:640px;margin-bottom:64px;}
+.section-head h2{font-size:clamp(32px,4vw,48px);margin-top:20px;}
+.divider{height:8px;width:100%;margin:0;}
+
+/* ===== ABOUT ===== */
+.about{background:var(--ink-soft);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.about-copy p{color:var(--cream-dim);margin-bottom:18px;font-size:16px;}
+.about-badges{display:flex;gap:28px;margin-top:38px;flex-wrap:wrap;}
+.badge{
+  border:1px solid var(--line-strong);padding:16px 20px;flex:1;min-width:140px;
+}
+.badge-num{font-family:var(--ff-display);font-size:26px;color:var(--gold-soft);}
+.badge-label{font-family:var(--ff-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--cream-dim);margin-top:6px;}
+.about-photo{position:relative;}
+.about-photo img{width:100%;height:520px;object-fit:cover;border:1px solid var(--line-strong);}
+.about-photo::before{
+  content:"";position:absolute;top:-18px;right:-18px;width:100%;height:100%;
+  border:1px solid var(--gold);z-index:-1;
+}
+
+/* ===== SERVICES ===== */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.service-card{background:var(--ink);padding:40px 34px;transition:background 0.25s ease;}
+.service-card:hover{background:var(--ink-soft);}
+.service-num{font-family:var(--ff-mono);font-size:12px;color:var(--gold);letter-spacing:0.1em;}
+.service-card h3{font-size:24px;margin-top:18px;color:var(--cream);}
+.service-card p{color:var(--cream-dim);margin-top:12px;font-size:14.5px;}
+.service-meta{
+  margin-top:24px;display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--line);padding-top:16px;
+}
+.service-time{font-family:var(--ff-mono);font-size:12px;color:var(--gold-soft);letter-spacing:0.06em;}
+.service-price{font-family:var(--ff-mono);font-size:12px;color:var(--cream-dim);}
+
+/* ===== GALLERY ===== */
+.gallery{background:var(--ink-soft);}
+.gallery-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:260px 260px;gap:14px;}
+.gallery-grid img{width:100%;height:100%;object-fit:cover;}
+.g1{grid-row:1/3;height:534px;}
+.g-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:14px 18px;background:linear-gradient(0deg, rgba(0,0,0,0.75), transparent);
+  font-family:var(--ff-mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--cream);
+}
+.gitem{position:relative;overflow:hidden;}
+
+/* ===== TESTIMONIALS ===== */
+.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.testi-card{background:var(--ink);padding:38px 36px;}
+.testi-stars{font-family:var(--ff-mono);color:var(--gold);font-size:14px;letter-spacing:2px;}
+.testi-text{font-family:var(--ff-display);font-style:italic;font-size:19px;line-height:1.5;margin-top:18px;color:var(--cream);}
+.testi-name{margin-top:22px;font-family:var(--ff-mono);font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold-soft);}
+
+/* ===== BOOKING ===== */
+.booking{background:var(--ink-soft);}
+.booking-shell{
+  display:grid;grid-template-columns:0.85fr 1.15fr;border:1px solid var(--line-strong);
+}
+.booking-side{
+  background:var(--card);padding:56px 44px;position:relative;
+  background-image:linear-gradient(180deg, rgba(21,18,15,0.55), rgba(21,18,15,0.9)), url('interieur.jpg');
+  background-size:cover;background-position:center;
+}
+.booking-side h3{font-size:30px;color:var(--cream);margin-top:18px;}
+.booking-side p{color:var(--cream-dim);margin-top:16px;font-size:15px;}
+.hours-table{margin-top:32px;border-top:1px solid var(--line-strong);}
+.hours-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-family:var(--ff-mono);font-size:12.5px;}
+.hours-row span:first-child{color:var(--cream-dim);}
+.hours-row span:last-child{color:var(--gold-soft);}
+.booking-form{padding:56px 48px;}
+.step-label{font-family:var(--ff-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:14px;}
+.field{margin-bottom:26px;}
+.field label{display:block;font-family:var(--ff-mono);font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:var(--cream-dim);margin-bottom:10px;}
+.field input, .field select{
+  width:100%;background:transparent;border:none;border-bottom:1px solid var(--line-strong);
+  color:var(--cream);font-family:var(--ff-body);font-size:15px;padding:10px 2px;
+  outline:none;
+}
+.field input::placeholder{color:rgba(244,236,218,0.35);}
+.field input:focus, .field select:focus{border-bottom-color:var(--gold);}
+.field select option{background:var(--ink);color:var(--cream);}
+.service-pick{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.pick-opt{
+  border:1px solid var(--line-strong);padding:14px 16px;cursor:pointer;font-size:13.5px;
+  transition:border-color 0.2s ease, background 0.2s ease;
+}
+.pick-opt:hover{border-color:var(--gold);}
+.pick-opt.selected{border-color:var(--gold);background:rgba(193,154,88,0.1);}
+.pick-opt .po-name{font-weight:600;color:var(--cream);}
+.pick-opt .po-time{display:block;font-family:var(--ff-mono);font-size:11px;color:var(--gold-soft);margin-top:4px;}
+.slots{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px;}
+.slot-btn{
+  font-family:var(--ff-mono);font-size:12.5px;border:1px solid var(--line-strong);
+  padding:9px 14px;cursor:pointer;background:transparent;color:var(--cream);
+  transition:border-color 0.2s ease, background 0.2s ease;
+}
+.slot-btn:hover{border-color:var(--gold);}
+.slot-btn.selected{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+.slot-btn:disabled{opacity:0.3;cursor:not-allowed;text-decoration:line-through;}
+.form-error{color:var(--oxblood-soft);font-family:var(--ff-mono);font-size:12px;margin-top:8px;display:none;}
+.form-error.show{display:block;}
+.empty-slots{font-family:var(--ff-mono);font-size:12.5px;color:var(--cream-dim);}
+.confirm-box{
+  display:none;border:1px solid var(--gold);padding:32px;
+}
+.confirm-box.show{display:block;}
+.confirm-box h4{font-family:var(--ff-display);font-size:24px;color:var(--gold-soft);}
+.confirm-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;}
+.confirm-row span:first-child{color:var(--cream-dim);font-family:var(--ff-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.06em;}
+
+/* ===== CONTACT / FOOTER ===== */
+.contact{padding-bottom:0;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+.contact-info{background:var(--ink);padding:56px;}
+.contact-info h2{font-size:34px;margin-top:16px;}
+.contact-line{display:flex;gap:16px;margin-top:26px;font-size:15px;}
+.contact-line .cl-label{font-family:var(--ff-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold-soft);min-width:90px;}
+.social-row{display:flex;gap:14px;margin-top:34px;}
+.social-row a{border:1px solid var(--line-strong);padding:10px 18px;font-family:var(--ff-mono);font-size:12px;text-transform:uppercase;letter-spacing:0.06em;}
+.social-row a:hover{border-color:var(--gold);color:var(--gold-soft);}
+.map-frame{background:var(--ink);min-height:400px;}
+.map-frame iframe{width:100%;height:100%;min-height:400px;border:0;filter:grayscale(0.35) contrast(1.05);}
+footer{background:var(--ink-soft);padding:40px 0;border-top:1px solid var(--line);}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.foot-row p{font-family:var(--ff-mono);font-size:11.5px;color:var(--cream-dim);letter-spacing:0.03em;}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease, transform 0.7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+@media (max-width:980px){
+  .about-grid, .contact-grid, .services-grid, .testi-grid, .booking-shell{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:220px 220px;}
+  .g1{grid-row:auto;height:220px;}
+  section{padding:80px 0;}
+  .wrap{padding:0 22px;}
+  .booking-side{padding:40px 30px;}
+  .booking-form{padding:40px 30px;}
+  .contact-info{padding:40px 30px;}
+}
+@media (max-width:600px){
+  .service-pick{grid-template-columns:1fr;}
+  .about-badges{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="#accueil" class="brand">
+      <div class="brand-mark pole-stripe"></div>
+      <div class="brand-text">ACE Barber Shop<span>Barbier · Aylmer, Gatineau</span></div>
+    </a>
+    <nav class="links">
+      <a href="#apropos">À propos</a>
+      <a href="#services">Services</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#avis">Avis</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="nav-phone">(819) 319-5955</span>
+      <a href="#reservation" class="btn small solid">Réserver</a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#apropos">À propos</a>
+    <a href="#services">Services</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#avis">Avis</a>
+    <a href="#reservation">Réserver</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
+<section id="accueil" class="hero">
+  <div class="hero-bg" role="img" aria-label="Coupe dégradée réalisée chez ACE Barber Shop Barbier"></div>
+  <div class="pole-edge pole-stripe"></div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Barbershop père &amp; fils — Aylmer, Gatineau</p>
+    <h1>Une coupe nette,<br><em>un métier qui se transmet.</em></h1>
+    <p class="hero-sub">Depuis 2020, ACE Barber Shop Barbier reçoit le quartier d'Aylmer pour des coupes classiques, des barbes soignées et des rasages à l'ancienne — sans rendez-vous ou réservés en deux clics.</p>
+    <div class="hero-cta">
+      <a href="#reservation" class="btn solid">Réserver un rendez-vous</a>
+      <a href="#services" class="btn">Voir les services</a>
+    </div>
+    <div class="hero-facts">
+      <div>
+        <div class="hero-fact-label">Depuis</div>
+        <div class="hero-fact-value">2020</div>
+      </div>
+      <div>
+        <div class="hero-fact-label">Expérience combinée</div>
+        <div class="hero-fact-value">30+ ans</div>
+      </div>
+      <div>
+        <div class="hero-fact-label">Formule</div>
+        <div class="hero-fact-value">Rendez-vous ou walk-in</div>
+      </div>
+      <div>
+        <div class="hero-fact-label">Adresse</div>
+        <div class="hero-fact-value">135-A Rue Principale</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="apropos" class="about">
+  <div class="wrap about-grid">
+    <div class="about-copy reveal">
+      <p class="eyebrow">L'atelier</p>
+      <h2 style="margin-top:20px;margin-bottom:24px;">Une affaire de famille, un savoir-faire de barbier.</h2>
+      <p>ACE Barber Shop Barbier est né en 2020 d'un duo père-fils qui partage la même chaise et la même exigence. Plus de trente ans de métier réunis derrière le fauteuil, entre coupes classiques et finitions modernes.</p>
+      <p>Le salon accueille aussi bien les habitués pressés en après-midi que les familles du samedi matin — cheveux longs, courts, ou première coupe des tout-petits. Le tout dans un espace lumineux, propre et sans chichi, où on vient autant pour la coupe que pour la conversation.</p>
+      <p>Pas besoin de réserver pour passer : les portes sont ouvertes en walk-in. Mais si vous préférez planifier votre plage horaire, la réservation en ligne prend trente secondes.</p>
+      <div class="about-badges">
+        <div class="badge">
+          <div class="badge-num">Père &amp; fils</div>
+          <div class="badge-label">Équipe de barbiers</div>
+        </div>
+        <div class="badge">
+          <div class="badge-num">Walk-in</div>
+          <div class="badge-label">Accepté en tout temps</div>
+        </div>
+        <div class="badge">
+          <div class="badge-num">Accessible</div>
+          <div class="badge-label">Mobilité réduite bienvenue</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-photo reveal">
+      <img src="interieur.jpg" alt="Intérieur du salon ACE Barber Shop Barbier avec fauteuils et poste de coiffure">
+    </div>
+  </div>
+</section>
+
+<div class="divider pole-stripe"></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ce qu'on fait</p>
+      <h2>Des classiques bien exécutés.</h2>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Coupe classique</h3>
+        <p>Ciseaux et tondeuse, dégradé net ou coupe traditionnelle — ajustée à la forme de votre visage.</p>
+        <div class="service-meta">
+          <span class="service-time">≈ 30 min</span>
+          <span class="service-price">Tarif sur place</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>Coupe + barbe</h3>
+        <p>La combinaison complète : coupe soignée et mise en forme de la barbe au rasoir et aux ciseaux.</p>
+        <div class="service-meta">
+          <span class="service-time">≈ 45 min</span>
+          <span class="service-price">Tarif sur place</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Rasage à l'ancienne</h3>
+        <p>Serviette chaude, mousse et rasoir droit, pour une peau nette et un vrai moment de détente.</p>
+        <div class="service-meta">
+          <span class="service-time">≈ 30 min</span>
+          <span class="service-price">Tarif sur place</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Coupe enfant</h3>
+        <p>Un service patient et rassurant, jusqu'aux premières coupes des plus jeunes clients.</p>
+        <div class="service-meta">
+          <span class="service-time">≈ 30 min</span>
+          <span class="service-price">Tarif sur place</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <h3>Entretien de barbe</h3>
+        <p>Taille, ligne et hydratation pour garder une barbe bien dessinée entre deux grandes coupes.</p>
+        <div class="service-meta">
+          <span class="service-time">≈ 20 min</span>
+          <span class="service-price">Tarif sur place</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <h3>Coiffure longue &amp; moyenne</h3>
+        <p>Techniques adaptées aux cheveux longs et mi-longs, pour hommes comme pour femmes.</p>
+        <div class="service-meta">
+          <span class="service-time">Sur mesure</span>
+          <span class="service-price">Tarif sur place</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galerie" class="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Dans le salon</p>
+      <h2>Un aperçu de l'atelier.</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gitem g1">
+        <img src="interieur.jpg" alt="Vue d'ensemble du salon ACE Barber Shop Barbier">
+        <div class="g-caption">Le salon — Rue Principale, Aylmer</div>
+      </div>
+      <div class="gitem">
+        <img src="coupe.jpg" alt="Dégradé soigné réalisé au salon">
+        <div class="g-caption">Dégradé maison</div>
+      </div>
+      <div class="gitem">
+        <img src="enseigne.jpg" alt="Enseigne extérieure Barbier ACE BarberShop">
+        <div class="g-caption">L'enseigne, Rue Principale</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider pole-stripe"></div>
+
+<section id="avis">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ce qu'on en dit</p>
+      <h2>La clientèle en parle mieux que nous.</h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« Le souci du détail est sans égal — on sent qu'ils aiment vraiment leur métier et leurs clients. Une coupe impeccable à chaque visite. »</p>
+        <div class="testi-name">Chris H.</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« Un service et une technique excellents, autant sur cheveux longs que courts. De vrais pros, et en plus sans rendez-vous — super pratique. »</p>
+        <div class="testi-name">Marilyn L.</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« Un travail remarquable de cette équipe père-fils. Un vrai trésor pour notre communauté. »</p>
+        <div class="testi-name">Agata B.</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« Une coupe superbe, un accueil pro et amical, et un salon impeccable. Vraiment satisfaite du service. »</p>
+        <div class="testi-name">Katriya T.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reservation" class="booking">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Prendre rendez-vous</p>
+      <h2>Réservez votre plage horaire.</h2>
+    </div>
+    <div class="booking-shell reveal">
+      <div class="booking-side">
+        <p class="eyebrow">Horaires</p>
+        <h3>Ouvert du mardi au samedi.</h3>
+        <p>Pas envie de réserver ? Le salon accepte aussi les clients sans rendez-vous, selon la disponibilité des barbiers.</p>
+        <div class="hours-table">
+          <div class="hours-row"><span>Lundi</span><span>Fermé</span></div>
+          <div class="hours-row"><span>Mardi</span><span>10h00 – 18h00</span></div>
+          <div class="hours-row"><span>Mercredi</span><span>10h00 – 18h00</span></div>
+          <div class="hours-row"><span>Jeudi</span><span>10h00 – 18h00</span></div>
+          <div class="hours-row"><span>Vendredi</span><span>10h00 – 18h00</span></div>
+          <div class="hours-row"><span>Samedi</span><span>10h00 – 17h00</span></div>
+          <div class="hours-row"><span>Dimanche</span><span>Fermé</span></div>
+        </div>
+      </div>
+      <div class="booking-form">
+        <form id="bookingForm" novalidate>
+          <div class="step-label">1. Choisissez un service</div>
+          <div class="service-pick" id="servicePick" style="margin-bottom:30px;"></div>
+
+          <div class="step-label">2. Choisissez une date</div>
+          <div class="field">
+            <label for="dateInput">Date du rendez-vous</label>
+            <input type="date" id="dateInput" required>
+            <div class="form-error" id="dateError">Le salon est fermé le dimanche et le lundi. Choisissez une autre date.</div>
+          </div>
+
+          <div class="step-label">3. Choisissez une heure</div>
+          <div class="field">
+            <div class="slots" id="slotsWrap">
+              <span class="empty-slots">Sélectionnez d'abord un service et une date.</span>
+            </div>
+            <div class="form-error" id="slotError">Choisissez une heure disponible.</div>
+          </div>
+
+          <div class="step-label">4. Vos coordonnées</div>
+          <div class="field">
+            <label for="nameInput">Nom complet</label>
+            <input type="text" id="nameInput" placeholder="Prénom et nom" required>
+            <div class="form-error" id="nameError">Entrez votre nom.</div>
+          </div>
+          <div class="field">
+            <label for="phoneInput">Téléphone</label>
+            <input type="tel" id="phoneInput" placeholder="819 555 0123" required>
+            <div class="form-error" id="phoneError">Entrez un numéro de téléphone valide.</div>
+          </div>
+          <div class="field">
+            <label for="emailInput">Courriel (optionnel)</label>
+            <input type="email" id="emailInput" placeholder="nom@courriel.com">
+          </div>
+
+          <button type="submit" class="btn solid" style="width:100%;justify-content:center;margin-top:8px;">Confirmer la réservation</button>
+        </form>
+
+        <div class="confirm-box" id="confirmBox">
+          <p class="eyebrow">Rendez-vous confirmé</p>
+          <h4 style="margin-top:14px;">C'est noté !</h4>
+          <div style="margin-top:22px;">
+            <div class="confirm-row"><span>Service</span><span id="cService"></span></div>
+            <div class="confirm-row"><span>Date</span><span id="cDate"></span></div>
+            <div class="confirm-row"><span>Heure</span><span id="cTime"></span></div>
+            <div class="confirm-row"><span>Nom</span><span id="cName"></span></div>
+          </div>
+          <div style="display:flex;gap:14px;margin-top:26px;flex-wrap:wrap;">
+            <button class="btn small" id="icsBtn" type="button">Ajouter à mon calendrier</button>
+            <button class="btn small" id="newBookingBtn" type="button">Nouvelle réservation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <p class="eyebrow">Nous trouver</p>
+        <h2>Rue Principale, Aylmer.</h2>
+        <div class="contact-line">
+          <span class="cl-label">Adresse</span>
+          <span>135-A Rue Principale<br>Gatineau (Aylmer), QC J9H 3M6</span>
+        </div>
+        <div class="contact-line">
+          <span class="cl-label">Téléphone</span>
+          <span><a href="tel:+18193195955">(819) 319-5955</a></span>
+        </div>
+        <div class="contact-line">
+          <span class="cl-label">Horaires</span>
+          <span>Mar–Ven 10h–18h · Sam 10h–17h<br>Fermé dim. et lun.</span>
+        </div>
+        <div class="contact-line">
+          <span class="cl-label">Accès</span>
+          <span>Accessible aux personnes à mobilité réduite · Wi-Fi disponible</span>
+        </div>
+        <div class="social-row">
+          <a href="https://www.instagram.com/barbier_ace_barbershop/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/barbierACEbarbershop/" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </div>
+      <div class="map-frame">
+        <iframe src="https://www.google.com/maps?q=135-A+Rue+Principale,+Gatineau,+QC+J9H+3M6&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte — ACE Barber Shop Barbier"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <p>© <span id="year"></span> ACE Barber Shop Barbier — 135-A Rue Principale, Gatineau (Aylmer), QC</p>
+    <p>Site conçu pour le salon · Barbershop père &amp; fils depuis 2020</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+var burgerBtn = document.getElementById('burgerBtn');
+var mobilePanel = document.getElementById('mobilePanel');
+burgerBtn.addEventListener('click', function(){
+  var open = mobilePanel.classList.toggle('open');
+  burgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+mobilePanel.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click', function(){ mobilePanel.classList.remove('open'); });
+});
+
+var revealEls = document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(function(el){ io.observe(el); });
+} else {
+  revealEls.forEach(function(el){ el.classList.add('in'); });
+}
+
+/* ===== BOOKING SYSTEM ===== */
+var SERVICES = [
+  {id:'coupe', name:'Coupe classique', duration:30},
+  {id:'coupebarbe', name:'Coupe + barbe', duration:45},
+  {id:'rasage', name:"Rasage à l'ancienne", duration:30},
+  {id:'enfant', name:'Coupe enfant', duration:30},
+  {id:'barbe', name:'Entretien de barbe', duration:20},
+  {id:'longue', name:'Coiffure longue', duration:45}
+];
+var HOURS = {
+  2:{open:10,close:18},
+  3:{open:10,close:18},
+  4:{open:10,close:18},
+  5:{open:10,close:18},
+  6:{open:10,close:17}
+};
+var STORE_KEY = 'aceBarberBookings';
+
+var servicePick = document.getElementById('servicePick');
+var selectedService = null;
+SERVICES.forEach(function(s){
+  var el = document.createElement('div');
+  el.className = 'pick-opt';
+  el.setAttribute('data-id', s.id);
+  el.innerHTML = '<span class="po-name">'+s.name+'</span><span class="po-time">≈ '+s.duration+' min</span>';
+  el.addEventListener('click', function(){
+    document.querySelectorAll('.pick-opt').forEach(function(p){ p.classList.remove('selected'); });
+    el.classList.add('selected');
+    selectedService = s;
+    renderSlots();
+  });
+  servicePick.appendChild(el);
+});
+
+var dateInput = document.getElementById('dateInput');
+var today = new Date();
+dateInput.min = today.toISOString().slice(0,10);
+var dateError = document.getElementById('dateError');
+var slotsWrap = document.getElementById('slotsWrap');
+var slotError = document.getElementById('slotError');
+var selectedSlot = null;
+
+function getBookings(){
+  try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || []; }
+  catch(e){ return []; }
+}
+function saveBooking(b){
+  var all = getBookings();
+  all.push(b);
+  localStorage.setItem(STORE_KEY, JSON.stringify(all));
+}
+
+function renderSlots(){
+  selectedSlot = null;
+  dateError.classList.remove('show');
+  slotsWrap.innerHTML = '';
+
+  if(!selectedService){
+    slotsWrap.innerHTML = '<span class="empty-slots">Sélectionnez d\'abord un service et une date.</span>';
+    return;
+  }
+  if(!dateInput.value){
+    slotsWrap.innerHTML = '<span class="empty-slots">Choisissez une date pour voir les heures disponibles.</span>';
+    return;
+  }
+  var d = new Date(dateInput.value + 'T00:00:00');
+  var day = d.getDay();
+  if(!HOURS[day]){
+    dateError.classList.add('show');
+    slotsWrap.innerHTML = '<span class="empty-slots">Aucune plage horaire ce jour-là.</span>';
+    return;
+  }
+  var range = HOURS[day];
+  var dur = selectedService.duration;
+  var existing = getBookings().filter(function(b){ return b.date === dateInput.value; }).map(function(b){ return b.time; });
+
+  var slots = [];
+  for(var h = range.open*60; h + dur <= range.close*60; h += 30){
+    var hh = Math.floor(h/60), mm = h % 60;
+    var label = (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;
+    slots.push(label);
+  }
+  if(slots.length === 0){
+    slotsWrap.innerHTML = '<span class="empty-slots">Aucune plage horaire disponible pour ce service ce jour-là.</span>';
+    return;
+  }
+  slots.forEach(function(label){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'slot-btn';
+    b.textContent = label;
+    if(existing.indexOf(label) !== -1){
+      b.disabled = true;
+    } else {
+      b.addEventListener('click', function(){
+        document.querySelectorAll('.slot-btn').forEach(function(s){ s.classList.remove('selected'); });
+        b.classList.add('selected');
+        selectedSlot = label;
+        slotError.classList.remove('show');
+      });
+    }
+    slotsWrap.appendChild(b);
+  });
+}
+dateInput.addEventListener('change', renderSlots);
+
+var form = document.getElementById('bookingForm');
+var confirmBox = document.getElementById('confirmBox');
+var lastBooking = null;
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  var ok = true;
+
+  if(!selectedService){ ok = false; }
+  if(!dateInput.value || !HOURS[new Date(dateInput.value+'T00:00:00').getDay()]){
+    dateError.classList.add('show'); ok = false;
+  } else {
+    dateError.classList.remove('show');
+  }
+  if(!selectedSlot){ slotError.classList.add('show'); ok = false; } else { slotError.classList.remove('show'); }
+
+  var nameInput = document.getElementById('nameInput');
+  var nameError = document.getElementById('nameError');
+  if(!nameInput.value.trim()){ nameError.classList.add('show'); ok = false; } else { nameError.classList.remove('show'); }
+
+  var phoneInput = document.getElementById('phoneInput');
+  var phoneError = document.getElementById('phoneError');
+  var phoneDigits = phoneInput.value.replace(/\D/g,'');
+  if(phoneDigits.length < 10){ phoneError.classList.add('show'); ok = false; } else { phoneError.classList.remove('show'); }
+
+  if(!ok) return;
+
+  var booking = {
+    service: selectedService.name,
+    duration: selectedService.duration,
+    date: dateInput.value,
+    time: selectedSlot,
+    name: nameInput.value.trim(),
+    phone: phoneInput.value.trim(),
+    email: document.getElementById('emailInput').value.trim()
+  };
+  saveBooking(booking);
+  lastBooking = booking;
+
+  var dateObj = new Date(booking.date + 'T00:00:00');
+  var dateLabel = dateObj.toLocaleDateString('fr-CA', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+
+  document.getElementById('cService').textContent = booking.service;
+  document.getElementById('cDate').textContent = dateLabel;
+  document.getElementById('cTime').textContent = booking.time;
+  document.getElementById('cName').textContent = booking.name;
+
+  form.style.display = 'none';
+  confirmBox.classList.add('show');
+});
+
+document.getElementById('newBookingBtn').addEventListener('click', function(){
+  form.reset();
+  document.querySelectorAll('.pick-opt').forEach(function(p){ p.classList.remove('selected'); });
+  selectedService = null;
+  selectedSlot = null;
+  slotsWrap.innerHTML = '<span class="empty-slots">Sélectionnez d\'abord un service et une date.</span>';
+  confirmBox.classList.remove('show');
+  form.style.display = 'block';
+});
+
+document.getElementById('icsBtn').addEventListener('click', function(){
+  if(!lastBooking) return;
+  var start = new Date(lastBooking.date + 'T' + lastBooking.time + ':00');
+  var end = new Date(start.getTime() + lastBooking.duration*60000);
+  function fmt(d){
+    return d.getUTCFullYear() + pad(d.getUTCMonth()+1) + pad(d.getUTCDate()) + 'T' + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + '00Z';
+  }
+  function pad(n){ return n < 10 ? '0'+n : ''+n; }
+  var ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//ACE Barber Shop Barbier//FR','BEGIN:VEVENT',
+    'UID:'+Date.now()+'@acebarbershop',
+    'DTSTAMP:'+fmt(new Date()),
+    'DTSTART:'+fmt(start),
+    'DTEND:'+fmt(end),
+    'SUMMARY:'+lastBooking.service+' — ACE Barber Shop Barbier',
+    'LOCATION:135-A Rue Principale, Gatineau (Aylmer), QC J9H 3M6',
+    'DESCRIPTION:Rendez-vous pour '+lastBooking.name+'. Tel salon: (819) 319-5955',
+    'END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  var blob = new Blob([ics], {type:'text/calendar'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'rendez-vous-ace-barbershop.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+</script>
+</body>
+</html>
